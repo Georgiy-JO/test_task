@@ -78,7 +78,7 @@ double Vector3D::Length() const{
   return std::sqrt(x * x + y * y + z * z);
 }
 
-std::tuple<double, double, double> Vector3D::Get() const{
+Vec3 Vector3D::Get() const{
   return {x, y, z};
 }
 

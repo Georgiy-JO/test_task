@@ -1,8 +1,20 @@
 #ifndef SRC_CORE_MATH_VECTOR_3D_H
 #define SRC_CORE_MATH_VECTOR_3D_H
-#include <tuple>
+#include <array>
 
 namespace geometry {
+
+/**
+ * @note Из условия задачи (см. task_2segments.doc) следует, что у Vector3D 
+ * поля x, y, z - приватные. Однако для получения данных о векторе нам удобно
+ * иметь структуру также с параметрами x, y, z. В принципе можно заменить 
+ * x, y, z в Vector3D на эту структуру, но это противоречит условиям задания.
+ */
+struct Vec3{
+  double x = 0.0;
+  double y = 0.0;
+  double z = 0.0;
+};
 
 class Vector3D {
   public:
@@ -15,7 +27,7 @@ class Vector3D {
     void Set(double x_, double y_, double z_);
     void Set(const Vector3D &vec);
     double Length() const;
-    std::tuple<double, double, double> Get() const;
+    Vec3 Get() const;
     void Normalize();
 
     Vector3D operator*(double number) const;

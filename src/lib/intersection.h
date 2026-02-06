@@ -5,7 +5,6 @@
 #include "segment3d.h"
 #include <exception>
 #include <string>
-#include <tuple>
 
 
 namespace geometry{
@@ -20,7 +19,7 @@ namespace geometry{
 
     class OverlapError : public std::exception {
     public:
-        OverlapError(const Vector3D& begin, const Vector3D& end, char* error = "Segments overlap.") : overlap_begin(begin), overlap_end(end), msg(error) {}
+        OverlapError(const Vector3D& begin, const Vector3D& end, std::string error = "Segments overlap.") : overlap_begin(begin), overlap_end(end), msg(error) {}
         OverlapError(const OverlapError& other) : overlap_begin(other.overlap_begin), overlap_end(other.overlap_end),msg(other.msg) {}
         const char* what() const noexcept override { return msg.c_str(); }
         const std::pair<Vector3D, Vector3D> GetOverlap() const { return {overlap_begin, overlap_end}; }
@@ -31,7 +30,7 @@ namespace geometry{
     };
     class ParallelError : public std::exception {
     public:
-        ParallelError(const char* error = "Segments are parallel, but not collinear.") : msg(error) {}
+        ParallelError(const std::string error = "Segments are parallel, but not collinear.") : msg(error) {}
         ParallelError(const ParallelError& other) : msg(other.msg) {}
         const char* what() const noexcept override { return msg.c_str(); }
     private:
@@ -39,7 +38,7 @@ namespace geometry{
     };
     class SkewError : public std::exception {
     public:
-        SkewError(const char* error = "Segments are skew (not parallel and lie in different planes).") : msg(error) {}
+        SkewError(const std::string error = "Segments are skew (not parallel and lie in different planes).") : msg(error) {}
         SkewError(const SkewError& other) : msg(other.msg) {}
         const char* what() const noexcept override { return msg.c_str(); }
     private:
@@ -47,7 +46,7 @@ namespace geometry{
     };
     class NoIntersectError : public std::exception {
     public:
-        NoIntersectError(const char* error = "Segments do not intersect.") : msg(error) {}
+        NoIntersectError(const std::string error = "Segments do not intersect.") : msg(error) {}
         NoIntersectError(const NoIntersectError& other) : msg(other.msg) {}
         const char* what() const noexcept override { return msg.c_str(); }
     private:
@@ -56,7 +55,7 @@ namespace geometry{
 
 
     Vector3D Intersect(const Segment3D& segment_1, const Segment3D& segment_2);
-    std::tuple<double, double, double> IntersectValue(const Segment3D& segment_1, const Segment3D& segment_2);
+    Vec3 IntersectVec3(const Segment3D& segment_1, const Segment3D& segment_2);
     IntersectionType IntersectWrapper(const Segment3D& segment_1, const Segment3D& segment_2, Vector3D& intersection_point);
 
 

@@ -51,7 +51,7 @@ namespace geometry{
         }
     }
 
-    std::tuple<double, double, double> IntersectValue(const Segment3D& segment_1, const Segment3D& segment_2){
+    Vec3 IntersectVec3(const Segment3D& segment_1, const Segment3D& segment_2){
         return Intersect(segment_1, segment_2).Get();
     }
 
