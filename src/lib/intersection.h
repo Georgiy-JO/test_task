@@ -9,22 +9,25 @@
 
 
 namespace geometry{
-    constexpr double kEpsilon = 1e-6;
+    constexpr double kEpsilon = 1e-8;
 
 
     enum class IntersectionType{
         kIntersect=0,
         kOverlap=1,
-        kNoIntersect=4
+        kNoIntersect=2
     };
 
     class OverlapError : public std::exception {
     public:
-        OverlapError(const char* error = "Segments overlap.") : msg(error) {}
-        OverlapError(const OverlapError& other) : msg(other.msg) {}
+        OverlapError(const Vector3D& begin, const Vector3D& end, char* error = "Segments overlap.") : overlap_begin(begin), overlap_end(end), msg(error) {}
+        OverlapError(const OverlapError& other) : overlap_begin(other.overlap_begin), overlap_end(other.overlap_end),msg(other.msg) {}
         const char* what() const noexcept override { return msg.c_str(); }
+        const std::pair<Vector3D, Vector3D> GetOverlap() const { return {overlap_begin, overlap_end}; }
     private:
-        std::string msg;
+        Vector3D overlap_begin;
+        Vector3D overlap_end; 
+        std::string msg;  
     };
     class ParallelError : public std::exception {
     public:
@@ -36,7 +39,7 @@ namespace geometry{
     };
     class SkewError : public std::exception {
     public:
-        SkewError(const char* error = "Segments are skew (not parallel and lie).") : msg(error) {}
+        SkewError(const char* error = "Segments are skew (not parallel and lie in different planes).") : msg(error) {}
         SkewError(const SkewError& other) : msg(other.msg) {}
         const char* what() const noexcept override { return msg.c_str(); }
     private:

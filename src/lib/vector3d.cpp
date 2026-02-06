@@ -90,5 +90,8 @@ Vector3D Vector3D::operator^(const Vector3D &vec) const{
   return Vector3D(y * vec.z - z * vec.y, z * vec.x - x * vec.z, x * vec.y - y * vec.x);
 }
 
+double MixProduct(const Vector3D &a, const Vector3D &b, const Vector3D &c){
+  return a * (b ^ c);     
+}
 
 }  // namespace geometry

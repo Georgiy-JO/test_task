@@ -45,6 +45,13 @@ class Vector3D {
     double z = 0.0f;
 };
 
+/**
+ * @brief Mix product (Смешанное произведение).
+ * @note a * (b x c)
+ */
+double MixProduct(const Vector3D &a, const Vector3D &b, const Vector3D &c);
+
+
 }  // namespace geometry
 
 #endif  // SRC_CORE_MATH_VECTOR_3D_H
