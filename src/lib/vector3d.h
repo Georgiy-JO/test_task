@@ -29,6 +29,16 @@ class Vector3D {
     bool operator==(const Vector3D &vec) const;
     bool operator!=(const Vector3D &vec) const;
 
+    /**
+     * @brief Dot product (Скалярное произведение).
+     */
+    double operator*(const Vector3D &vec) const;
+    /**
+     * @brief Cross product (Векторное произведение).
+     */
+    Vector3D operator^(const Vector3D &vec) const;
+
+
   private:
     double x = 0.0f;
     double y = 0.0f;

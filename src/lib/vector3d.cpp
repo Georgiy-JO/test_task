@@ -82,5 +82,13 @@ std::tuple<double, double, double> Vector3D::Get() const{
   return {x, y, z};
 }
 
+double Vector3D::operator*(const Vector3D &vec) const{
+  return x * vec.x+y * vec.y+ z * vec.z;
+}
+    
+Vector3D Vector3D::operator^(const Vector3D &vec) const{
+  return Vector3D(y * vec.z - z * vec.y, z * vec.x - x * vec.z, x * vec.y - y * vec.x);
+}
+
 
 }  // namespace geometry

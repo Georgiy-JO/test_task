@@ -25,10 +25,6 @@ class Segment3D
         Vector3D end;
 };
 
-Vector3D Intersect(const Segment3D& segment_1, const Segment3D& segment_2);
-std::tuple<double, double, double> IntersectValue(const Segment3D& segment_1, const Segment3D& segment_2);
-
-
 }   //namespace geometry
 
 #endif  // SRC_CORE_MATH_SEGMENT_3D_H
