@@ -4,7 +4,16 @@
 
 namespace geometry{
     Vector3D Intersect(const Segment3D& segment_1, const Segment3D& segment_2){
+        Vector3D dir_1 = segment_1.GetEnd() - segment_1.GetStart();
+        Vector3D dir_2 = segment_2.GetEnd() - segment_2.GetStart();
+        Vector3D diff = segment_1.GetStart() - segment_2.GetStart();
+        Vector3D cross_prod= dir_1 ^ dir_2;
+        double cross_prod_norm= cross_prod.Length();    
         
+        if(cross_prod_norm < kEpsilon){  //parallel
+            
+        }
+
     }
 
     std::tuple<double, double, double> IntersectValue(const Segment3D& segment_1, const Segment3D& segment_2){

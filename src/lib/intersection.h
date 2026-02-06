@@ -9,12 +9,12 @@
 
 
 namespace geometry{
+    constexpr double kEpsilon = 1e-6;
+
 
     enum class IntersectionType{
         kIntersect=0,
         kOverlap=1,
-        kParallel=2,
-        kSkew=3,
         kNoIntersect=4
     };
 
@@ -28,7 +28,7 @@ namespace geometry{
     };
     class ParallelError : public std::exception {
     public:
-        ParallelError(const char* error = "Segments are parallel.") : msg(error) {}
+        ParallelError(const char* error = "Segments are parallel, but not collinear.") : msg(error) {}
         ParallelError(const ParallelError& other) : msg(other.msg) {}
         const char* what() const noexcept override { return msg.c_str(); }
     private:
@@ -36,7 +36,7 @@ namespace geometry{
     };
     class SkewError : public std::exception {
     public:
-        SkewError(const char* error = "Segments are skew.") : msg(error) {}
+        SkewError(const char* error = "Segments are skew (not parallel and lie).") : msg(error) {}
         SkewError(const SkewError& other) : msg(other.msg) {}
         const char* what() const noexcept override { return msg.c_str(); }
     private:
