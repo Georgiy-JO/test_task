@@ -34,7 +34,7 @@ if(BUILD_TESTS OR BUILD_COVERAGE)
         ../lib/intersection.cpp
     )
     set(TEST_SRC
-        tests.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests.cpp
     )
 
     include(FetchContent)
@@ -57,7 +57,7 @@ if(BUILD_TESTS)
     target_include_directories(tests PRIVATE ${INCLUDE_DIRS})
     target_link_libraries(tests PRIVATE gtest_main pthread)
     set_property(TARGET tests PROPERTY CXX_STANDARD 20)
-    add_test(NAME CoreTests COMMAND tests)
+    add_test(NAME tests COMMAND tests)
 
     add_custom_target(run_tests
         COMMAND tests

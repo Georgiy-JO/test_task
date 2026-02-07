@@ -66,9 +66,8 @@ find_program(CLANG_FORMAT_EXE
 )
 
 if(CLANG_FORMAT_EXE)
-    find_file(CLANG_FILE 
-        ${CMAKE_CURRENT_SOURCE_DIR}/../.clang-format
-        ${CMAKE_CURRENT_SOURCE_DIR}/.clang-format
+    set(CLANG_FILE 
+        "${CMAKE_CURRENT_SOURCE_DIR}/../.clang-format"
         )
 
     # set(CHECKABLE_FILES
