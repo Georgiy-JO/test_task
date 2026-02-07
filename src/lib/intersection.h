@@ -10,13 +10,20 @@
 namespace geometry{
     constexpr double kEpsilon = 1e-8;
 
-
+    /**
+     * @note Основные 3 случая касательно пересечения отрезков ("типы пересечения").
+     */
     enum class IntersectionType{
         kIntersect=0,
         kOverlap=1,
         kNoIntersect=2
     };
 
+    /**
+     * @note OverlapError, ParallelError, SkewError, NoIntersectError - особые классы
+     * ошибок для функции пересечения отрезков (мы считаем пересечение как норму, 
+     * остальное - ошибка).
+     */
     class OverlapError : public std::exception {
     public:
         OverlapError(const Vector3D& begin, const Vector3D& end, std::string error = "Segments overlap.") : overlap_begin(begin), overlap_end(end), msg(error) {}
@@ -53,11 +60,19 @@ namespace geometry{
         std::string msg;
     };
 
-
+    /**
+     * @note Получает на ход 2 отрезка (сегмента), возвращает точку пересечения в формате Vector3D.
+     */
     Vector3D Intersect(const Segment3D& segment_1, const Segment3D& segment_2);
+    /**
+     * @note Получает на ход 2 отрезка (сегмента), возвращает точку пересечения в формате Vec3 (упрощенный формат для 3D точки).
+     */
     Vec3 IntersectVec3(const Segment3D& segment_1, const Segment3D& segment_2);
+    /**
+     * @note Получает на ход 2 отрезка (сегмента) и Vector3D в который будет записана точка пересечения,
+     * возвращает "тип пересечения" в формате IntersectionType.
+     */
     IntersectionType IntersectWrapper(const Segment3D& segment_1, const Segment3D& segment_2, Vector3D& intersection_point);
-
 
 } //namespace geometry
 #endif  // SRC_CORE_MATH_INTERSECTION_H

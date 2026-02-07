@@ -263,6 +263,12 @@ TEST(Intersection, Intersection){
 
     seg_a.Set({2,0,5},{0,2,5});
     EXPECT_THROW(geometry::Intersect(seg_a, seg_b), geometry::ParallelError);
+    try{
+        res=geometry::Intersect(seg_a, seg_b);
+    }
+    catch(const geometry::ParallelError& e){
+        EXPECT_STREQ(e.what(), "Segments are parallel, but not collinear.");
+    }
 
     seg_a.Set({3,-1,0},{5,-3,0});
     EXPECT_THROW(geometry::Intersect(seg_a, seg_b), geometry::NoIntersectError);
