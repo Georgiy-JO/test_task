@@ -47,7 +47,6 @@ if(BUILD_TESTS OR BUILD_COVERAGE)
 endif()
 
 if(BUILD_TESTS)
-    # Core tests
     add_executable(tests
         ${TEST_SRC}       # <- test code files
         ${SRC}

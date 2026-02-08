@@ -31,6 +31,9 @@ namespace geometry{
     Vector3D Segment3D::GetEnd() const{
         return end;
     }
+    Vector3D Segment3D::GetDirection() const{
+        return end - start;
+    }
 
 
 

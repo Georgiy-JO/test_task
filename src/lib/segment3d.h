@@ -19,6 +19,10 @@ class Segment3D
         std::pair<Vector3D, Vector3D> Get() const;
         Vector3D GetStart() const;
         Vector3D GetEnd() const;
+        /**
+         * @return Возвращает вектор направления прямой, на которой лежит отрезок.
+         */
+        Vector3D GetDirection() const;
     
     private:
         Vector3D start;

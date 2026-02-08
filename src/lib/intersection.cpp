@@ -6,17 +6,16 @@
 
 namespace geometry{
     Vector3D Intersect(const Segment3D& segment_1, const Segment3D& segment_2){
-        Vector3D dir_1 = segment_1.GetEnd() - segment_1.GetStart();
-        Vector3D dir_2 = segment_2.GetEnd() - segment_2.GetStart();
+        Vector3D dir_1 = segment_1.GetDirection();
+        Vector3D dir_2 = segment_2.GetDirection();
         Vector3D diff = segment_2.GetStart() - segment_1.GetStart();
         Vector3D cross_prod= dir_1 ^ dir_2;
         double cross_prod_norm_sq= cross_prod*cross_prod;    
         
-        if(cross_prod_norm_sq < kEpsilon*kEpsilon){                             // parallel
-
-            if((diff^dir_1).Length() >= kEpsilon)                   // not collinear
+        if(cross_prod_norm_sq < kEpsilon*kEpsilon){                 // параллельны
+            if((diff^dir_1).Length() >= kEpsilon)                   // не лежат на 1 прямой
                 throw ParallelError();
-                                                                    // collinear
+                                                                    // лежат на 1 прямой
             double dir_1_norm_sq = dir_1*dir_1;
             double dir_2_norm_sq = dir_2*dir_2;
 
@@ -38,10 +37,10 @@ namespace geometry{
                 return segment_1.GetStart()+dir_1*overlap_start;  
             }
         }
-        else{                                                       // not parallel
-            if(std::abs(diff*cross_prod)>=kEpsilon*std::sqrt(cross_prod_norm_sq)) // not coplanar
+        else{                                                       // не параллельны
+            if(std::abs(diff*cross_prod)>=kEpsilon*std::sqrt(cross_prod_norm_sq)) // не компланарны
                 throw SkewError();
-            // segment_1.GetStart() + t dir_1 = segment_2.GetStart() + s dir_2
+            // выводим из segment_1.GetStart() + t dir_1 = segment_2.GetStart() + s dir_2
             double t = (diff^dir_2)*cross_prod/cross_prod_norm_sq;
             Vector3D point = segment_1.GetStart() + dir_1*t;
             double s = (point-segment_2.GetStart())*dir_2/(dir_2*dir_2);
