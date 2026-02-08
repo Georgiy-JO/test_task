@@ -3,32 +3,31 @@
 
 #include "vector3d.h"
 
-namespace geometry{
-class Segment3D
-{
-    public:
-        constexpr Segment3D() = default;
-        constexpr Segment3D(const Vector3D& first, const Vector3D& second) : start(first), end(second) {}
-        constexpr Segment3D(const Segment3D &segment_) : start(segment_.start), end(segment_.end) {}
-        ~Segment3D() = default;
+namespace geometry {
+class Segment3D {
+ public:
+  constexpr Segment3D() = default;
+  constexpr Segment3D(const Vector3D& first, const Vector3D& second) : start(first), end(second) {}
+  constexpr Segment3D(const Segment3D& segment_) : start(segment_.start), end(segment_.end) {}
+  ~Segment3D() = default;
 
-        void Set(const Vector3D& first, const Vector3D& second);
-        void Set(const Segment3D &segment_);
-        void SetStart(const Vector3D& first);
-        void SetEnd(const Vector3D& second);
-        std::pair<Vector3D, Vector3D> Get() const;
-        Vector3D GetStart() const;
-        Vector3D GetEnd() const;
-        /**
-         * @return Возвращает вектор направления прямой, на которой лежит отрезок.
-         */
-        Vector3D GetDirection() const;
-    
-    private:
-        Vector3D start;
-        Vector3D end;
+  void Set(const Vector3D& first, const Vector3D& second);
+  void Set(const Segment3D& segment_);
+  void SetStart(const Vector3D& first);
+  void SetEnd(const Vector3D& second);
+  std::pair<Vector3D, Vector3D> Get() const;
+  Vector3D GetStart() const;
+  Vector3D GetEnd() const;
+  /**
+   * @return Возвращает вектор направления прямой, на которой лежит отрезок.
+   */
+  Vector3D GetDirection() const;
+
+ private:
+  Vector3D start;
+  Vector3D end;
 };
 
-}   //namespace geometry
+}  // namespace geometry
 
 #endif  // SRC_CORE_MATH_SEGMENT_3D_H
